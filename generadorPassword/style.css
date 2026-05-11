@@ -1,0 +1,331 @@
+/* ============================================
+   1. VARIABLES GLOBALES
+============================================ */
+:root {
+  --color-bg-page:       #14131b;   /* fondo de la página */
+  --color-bg-card:       #1e1d27;   /* tarjeta principal */
+  --color-bg-display:    #14131b;   /* fondo del display de contraseña */
+  --color-bg-input:      #14131b;   /* fondo del slider / opciones */
+ 
+  --color-accent:        #a4ffaf;   /* verde neón principal */
+  --color-accent-hover:  #7dda87;   /* verde al pasar el mouse */
+ 
+  --color-text-primary:  #e8e6f0;   /* texto principal (casi blanco) */
+  --color-text-muted:    #817d8e;   /* texto secundario (gris) */
+  --color-text-password: #e8e6f0;   /* contraseña generada */
+ 
+  /* Colores de fuerza de contraseña */
+  --color-weak:   #f64a4a;          /* rojo */
+  --color-fair:   #fb7c58;          /* naranja */
+  --color-medium: #f8cd65;          /* amarillo */
+  --color-strong: #a4ffaf;          /* verde */
+ 
+  --border-radius-card:  8px;
+  --border-radius-btn:   6px;
+  --font-main: 'Courier New', Courier, monospace;  /* tipografía monoespaciada */
+}
+ 
+ 
+/* ============================================
+   2. RESET Y BASE
+============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  min-height: 100vh;
+ 
+  /* Centrado vertical y horizontal con Flexbox */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+ 
+ 
+/* ============================================
+   3. TARJETA PRINCIPAL (container)
+============================================ */
+.container {
+  background-color: var(--color-bg-card);
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;   /* apila los hijos verticalmente */
+  gap: 1.25rem;             /* espacio entre secciones */
+}
+ 
+ 
+/* ============================================
+   4. TÍTULO
+============================================ */
+.title {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+ 
+ 
+/* ============================================
+   5. DISPLAY DE CONTRASEÑA
+============================================ */
+.password-display {
+  background-color: var(--color-bg-display);
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+ 
+.password-output {
+  font-size: 1.5rem;
+  color: var(--color-text-password);
+  letter-spacing: 0.08em;
+  /* Si la contraseña es muy larga, la recorta con ... */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+ 
+.copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-accent);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, transform 0.15s;
+  flex-shrink: 0;   /* evita que el botón se encoja */
+}
+ 
+.copy-btn:hover {
+  color: var(--color-accent-hover);
+  transform: scale(1.1);
+}
+ 
+/* Cuando el usuario copia, mostramos feedback visual */
+.copy-btn.copied {
+  color: #ffffff;
+}
+ 
+ 
+/* ============================================
+   6. CONTROL DE LONGITUD
+   Slider + número de caracteres.
+============================================ */
+.length-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+ 
+.length-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.length-header label {
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+}
+ 
+.length-value {
+  font-size: 1.6rem;
+  color: var(--color-accent);
+}
+ 
+/* --- Slider personalizado --- */
+.slider {
+  -webkit-appearance: none;   /* eliminamos el estilo por defecto */
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--color-bg-display);
+  outline: none;
+  cursor: pointer;
+}
+ 
+/* La "pista" llenada (color verde) se maneja con JS + gradiente de fondo */
+ 
+/* El "pulgar" (thumb) del slider — el círculo que arrastra el usuario */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  border: 2px solid var(--color-bg-card);
+  transition: background 0.2s;
+}
+ 
+.slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  border: 2px solid var(--color-bg-card);
+}
+ 
+.slider:hover::-webkit-slider-thumb {
+  background: var(--color-accent-hover);
+}
+ 
+ 
+/* ============================================
+   7. OPCIONES (checkboxes)
+============================================ */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+ 
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+}
+ 
+.option-item label {
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+ 
+/* Checkbox personalizado */
+.option-item input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-accent);
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: background 0.15s;
+}
+ 
+.option-item input[type="checkbox"]:checked {
+  background-color: var(--color-accent);
+}
+ 
+/* La palomita (✓) dentro del checkbox */
+.option-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid var(--color-bg-card);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+ 
+ 
+/* ============================================
+   8. INDICADOR DE FUERZA
+============================================ */
+.strength-indicator {
+  background-color: var(--color-bg-display);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.strength-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+ 
+.strength-result {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+ 
+.strength-text {
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-width: 60px;
+  text-align: right;
+}
+ 
+/* Las 4 barras de fuerza */
+.strength-bars {
+  display: flex;
+  gap: 6px;
+}
+ 
+.bar {
+  display: block;
+  width: 10px;
+  height: 26px;
+  border: 2px solid var(--color-text-primary);
+  background: transparent;
+  transition: background 0.3s, border-color 0.3s;
+}
+ 
+/* Estados de las barras según la fuerza */
+.bar.weak   { background: var(--color-weak);   border-color: var(--color-weak); }
+.bar.fair   { background: var(--color-fair);   border-color: var(--color-fair); }
+.bar.medium { background: var(--color-medium); border-color: var(--color-medium); }
+.bar.strong { background: var(--color-strong); border-color: var(--color-strong); }
+ 
+ 
+/* ============================================
+   9. BOTÓN GENERATE
+============================================ */
+.generate-btn {
+  width: 100%;
+  padding: 1.05rem;
+  background-color: var(--color-accent);
+  color: var(--color-bg-card);
+  border: none;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: background 0.2s, transform 0.1s;
+}
+ 
+.generate-btn:hover {
+  background-color: transparent;
+  color: var(--color-accent);
+  outline: 2px solid var(--color-accent);
+}
+ 
+.generate-btn:active {
+  transform: scale(0.98);
+}

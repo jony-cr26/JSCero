@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de Contraseña</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+
+    <!-- ============================
+         CONTENEDOR PRINCIPAL
+    ============================= -->
+    <main class="container">
+
+      <!-- TÍTULO DE LA APP -->
+      <h1 class="title">Generador de Contraseña</h1>
+
+      <!-- ============================
+           SECCIÓN 1: DISPLAY DE CONTRASEÑA
+           Muestra la contraseña generada y
+           el botón para copiarla al portapapeles
+      ============================= -->
+      <section class="password-display">
+        <span class="password-output" id="passwordOutput">PTx1f5DaFX</span>
+        <button class="copy-btn" id="copyBtn" title="Copiar contraseña">
+          <!-- Ícono de copiar -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </section>
+
+      <!-- ============================
+           SECCIÓN 2: LONGITUD DE LA CONTRASEÑA
+           Slider para elegir cuántos caracteres tendrá
+      ============================= -->
+      <section class="length-control">
+        <div class="length-header">
+          <label for="lengthSlider">Longitud de la Contraseña</label>
+          <span class="length-value" id="lengthValue">10</span>
+        </div>
+        <!-- El slider va de 8 a 20 caracteres -->
+        <input
+          type="range"
+          id="lengthSlider"
+          class="slider"
+          min="8"
+          max="20"
+          value="10"
+        />
+      </section>
+
+      <!-- ============================
+           SECCIÓN 3: OPCIONES DE CARACTERES
+           Checkboxes para elegir qué tipos de
+           caracteres incluir en la contraseña
+      ============================= -->
+      <section class="options">
+
+        <div class="option-item">
+          <input type="checkbox" id="uppercase" checked />
+          <label for="uppercase">Incluir Letras Mayúsculas</label>
+        </div>
+
+        <div class="option-item">
+          <input type="checkbox" id="lowercase" checked />
+          <label for="lowercase">Incluir Letras Minúsculas</label>
+        </div>
+
+        <div class="option-item">
+          <input type="checkbox" id="numbers" checked />
+          <label for="numbers">Incluir Números</label>
+        </div>
+
+        <div class="option-item">
+          <input type="checkbox" id="symbols" />
+          <label for="symbols">Incluir Símbolos</label>
+        </div>
+
+      </section>
+
+      <!-- ============================
+           SECCIÓN 4: INDICADOR DE FUERZA
+           Muestra qué tan segura es la contraseña
+           con texto (MUY DEBIL / DEBIL / MEDIO / FUERTE)
+           y barras visuales de color
+      ============================= -->
+      <section class="strength-indicator">
+        <span class="strength-label">FUERZA</span>
+        <div class="strength-result">
+          <span class="strength-text" id="strengthText">MEDIO</span>
+          <!-- Las 4 barras de fuerza -->
+          <div class="strength-bars" id="strengthBars">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================
+           BOTÓN GENERATE
+           Genera una nueva contraseña al hacer click
+      ============================= -->
+      <button class="generate-btn" id="generateBtn">
+        GENERAR
+        <!-- Flecha decorativa -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+
+    </main>
+
+    <!-- Enlazamos el JS al final para que el HTML cargue primero -->
+    <script src="script.js"></script>
+
+  </body>
+</html>
