@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seguimiento de Libros</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+
+    <!-- ============================
+         ENCABEZADO DE LA PÁGINA
+    ============================= -->
+    <header class="page-header">
+      <h1 class="page-title">📚 Seguimiento de Libros</h1>
+      <p class="page-subtitle">Lleva un registro de tus lecturas y comentarios</p>
+    </header>
+
+    <!-- ============================
+         CONTENEDOR PRINCIPAL
+    ============================= -->
+    <main class="container">
+
+      <!-- SECCIÓN 1: FORMULARIO
+           El usuario escribe aquí su comentario
+           y hace click en "Agregar"
+      -->
+      <section class="form-section">
+        <h2 class="section-title">Nuevo comentario</h2>
+
+        <!-- Campo para el título del libro -->
+        <div class="form-group">
+          <input
+            type="text"
+            id="bookTitle"
+            class="input-field"
+            placeholder="Título del libro..."
+          />
+        </div>
+
+        <!-- Campo para el comentario -->
+        <div class="form-group">
+          <textarea
+            id="commentInput"
+            class="textarea-field"
+            placeholder="Escribe tu comentario sobre el libro..."
+            rows="4"
+          ></textarea>
+        </div>
+
+        <button class="add-btn" id="addBtn">
+          + Agregar comentario
+        </button>
+
+        <!-- Mensaje de error -->
+        <p class="error-msg hidden" id="errorMsg">
+          ⚠️ Por favor completa todos los campos antes de agregar.
+        </p>
+
+      </section>
+
+      <!-- SECCIÓN 2: LISTA DE COMENTARIOS -->
+      <section class="comments-section">
+
+        <!-- Encabezado con contador -->
+        <div class="comments-header">
+          <h2 class="section-title">Comentarios</h2>
+          <span class="comment-count" id="commentCount">0 comentarios</span>
+        </div>
+
+        <!-- Mensaje vacío: visible al inicio -->
+        <p class="empty-msg" id="emptyMsg">
+          Aún no hay comentarios. ¡Agrega el primero! 🙌
+        </p>
+
+        <!-- Tarjetas de comentario -->
+        <div class="comments-list" id="commentsList"></div>
+
+      </section>
+
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
